@@ -14,10 +14,11 @@ export class ProductDetailComponent {
 
   constructor(private productService: ProductService) { }
 
-  getProduct(id: number) {
-    this.productService.getProduct(id).subscribe(
-      product => this.onProductRetrieved(product),
-      error => this.errorMessage = <any>error);
+  getProduct(id: number): void {
+    this.productService.getProduct(id).subscribe({
+      next: product => this.onProductRetrieved(product),
+      error: err => this.errorMessage = err
+    });
   }
 
   onProductRetrieved(product: Product): void {
